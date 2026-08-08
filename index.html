@@ -1080,7 +1080,7 @@ function pauseAutoGuide() {
   document.getElementById("pauseAutoBtn").textContent = autoPaused ? "▶ Продолжи" : "⏸ Пауза";
   if (autoPaused) {
     if (autoTimer) clearTimeout(autoTimer);
-    window.speechSynthesis.cancel();
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
     isSpeaking = false;
     document.getElementById("autoStatus").textContent = "⏸ Пауза";
   } else {
@@ -1093,7 +1093,7 @@ function stopAutoGuide() {
   autoRunning = false;
   autoPaused = false;
   if (autoTimer) clearTimeout(autoTimer);
-  window.speechSynthesis.cancel();
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
   isSpeaking = false;
   document.getElementById("startAutoBtn").classList.remove("hidden");
   document.getElementById("pauseAutoBtn").classList.add("hidden");
@@ -1107,7 +1107,7 @@ function stopAutoGuide() {
 function finishAutoGuide() {
   autoRunning = false;
   if (autoTimer) clearTimeout(autoTimer);
-  window.speechSynthesis.cancel();
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
   isSpeaking = false;
   document.getElementById("startAutoBtn").classList.remove("hidden");
   document.getElementById("pauseAutoBtn").classList.add("hidden");
@@ -1326,14 +1326,21 @@ function renderManualDua(posId, rakatNum, totalInPart) {
 // ПОСТАВУВАЊЕ НА СИТЕ AUDIO КОПЧИЊА (по вчитување)
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+  if (!window.speechSynthesis) {
+    console.warn("⚠️ Овој прелистувач/средина не поддржува говор (speechSynthesis). Копчињата 🔊 нема да произведат звук.");
+  }
   document.querySelectorAll('.audio-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
       const text = this.dataset.speak;
-      if (text) {
-        speakText(text, null);
-      } else {
+      if (!text) {
         console.warn("⚠️ Копчето нема data-speak атрибут:", this);
+        return;
       }
+      if (!window.speechSynthesis) {
+        showToast('⚠️ Говорот не е поддржан во овој прелистувач');
+        return;
+      }
+      speakText(text, null);
     });
   });
 });
