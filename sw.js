@@ -1,10 +1,18 @@
-const CACHE_NAME = 'namaz-vodic-v1';
+const CACHE_NAME = 'namaz-vodic-v4';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
   './icon-192.svg',
-  './icon-512.svg'
+  './icon-512.svg',
+  './img/abdest-hands.jpg',
+  './img/abdest-mouth.jpg',
+  './img/abdest-nose.jpg',
+  './img/abdest-face.jpg',
+  './img/abdest-arms.jpg',
+  './img/abdest-head.jpg',
+  './img/abdest-ears.jpg',
+  './img/abdest-feet.jpg'
 ];
 
 // Инсталација – кешираме ги основните датотеки
@@ -50,6 +58,19 @@ self.addEventListener('fetch', (event) => {
           return caches.match('./index.html');
         }
       });
+    })
+  );
+});
+
+// Кога корисникот кликнува на известување - фокусирај го отворениот таб или отвори нов
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        if ('focus' in client) return client.focus();
+      }
+      if (self.clients.openWindow) return self.clients.openWindow('./index.html');
     })
   );
 });
