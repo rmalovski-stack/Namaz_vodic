@@ -9,6 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Намаз – Решат">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>Водич за намаз за Решат Маловски</title>
 <style>
   :root {
@@ -233,7 +234,7 @@
 <p class="subtitle">Фарз • Суннет • Анимации • Абдест • Целосни дови</p>
 
 
-<div id="installWrap" style="text-align:center;margin-bottom:10px;display:none;">
+<div id="installWrap" style="text-align:center;margin-bottom:12px;">
   <button id="installBtn" style="background:#0d7377;color:#fff;border:none;padding:10px 18px;border-radius:20px;font-weight:600;font-size:0.95rem;cursor:pointer;">
     📲 Инсталирај на телефон
   </button>
@@ -1247,47 +1248,61 @@ if (window.speechSynthesis) {
 }
 </script>
 
+
+
+
 <script>
-// ===== PWA install =====
+// PWA – install + service worker
 let deferredPrompt = null;
+
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  const w = document.getElementById('installWrap');
-  if (w) w.style.display = 'block';
-});
-document.getElementById('installBtn') && document.getElementById('installBtn').addEventListener('click', async () => {
-  if (!deferredPrompt) {
-    alert('За да инсталираш:\\n\\nAndroid Chrome: Мени (⋮) → „Додај на почетен екран“ / „Install app“\\n\\niPhone Safari: Копче Сподели → „Додај на Почетен екран“');
-    return;
-  }
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  deferredPrompt = null;
-  const w = document.getElementById('installWrap');
-  if (w) w.style.display = 'none';
+  const btn = document.getElementById('installBtn');
+  if (btn) btn.textContent = '📲 Инсталирај апликација';
 });
 
-// ===== Service Worker (офлајн) =====
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  const hint = document.getElementById('installHint');
+  if (hint) hint.textContent = '✅ Инсталирано! Отвори ја од почетниот екран.';
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('installBtn');
+  if (btn) {
+    btn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      } else {
+        const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+        const isAndroid = /android/i.test(navigator.userAgent);
+        let msg = 'Како да инсталираш:\n\n';
+        if (isIOS) {
+          msg += 'iPhone (Safari):\n1. Отвори ја страницата во Safari\n2. Копче Сподели (квадрат со стрелка)\n3. „Додај на Почетен екран“';
+        } else if (isAndroid) {
+          msg += 'Android (Chrome):\n1. Мени ⋮ горе десно\n2. „Install app“ или „Додај на почетен екран“\n\nАко го нема:\n- Отвори ја страницата преку GitHub Pages линк (https)\n- Почекај 10-20 сек и пробај повторно';
+        } else {
+          msg += 'Отвори ја страницата во Chrome на телефонот (преку https линк од GitHub Pages),\nпотоа Мени ⋮ → Install app / Додај на почетен екран.\n\niPhone: Safari → Сподели → Додај на Почетен екран.';
+        }
+        alert(msg);
+      }
+    });
+  }
+});
+
+// Register service worker (only on https or localhost)
 if ('serviceWorker' in navigator) {
-  const swCode = `
-    const CACHE = 'namaz-reshat-v1';
-    self.addEventListener('install', e => {
-      e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./vodic-namaz.html', './'])));
-      self.skipWaiting();
+  const isSecure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  if (isSecure) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').then((reg) => {
+        console.log('SW registered', reg.scope);
+      }).catch((err) => console.warn('SW failed', err));
     });
-    self.addEventListener('activate', e => {
-      e.waitUntil(self.clients.claim());
-    });
-    self.addEventListener('fetch', e => {
-      e.respondWith(
-        caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match('./vodic-namaz.html')))
-      );
-    });
-  `;
-  const blob = new Blob([swCode], { type: 'application/javascript' });
-  const swUrl = URL.createObjectURL(blob);
-  navigator.serviceWorker.register(swUrl).catch(() => {});
+  }
 }
 </script>
 
