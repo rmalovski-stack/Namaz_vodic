@@ -236,6 +236,9 @@
     background: #f5f5f5; border-radius: 8px; border: 1px solid #ddd; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
   }
+  .person-draw img {
+    height: 100%; width: auto; max-width: 230px; object-fit: contain; display: block;
+  }
   .pd-head {
     width: 22px; height: 22px; background: #ffcc80; border-radius: 50%;
     position: absolute; left: 24px; top: 4px; border: 1.5px solid #e0a060;
@@ -275,6 +278,19 @@
   .draw-step3 .pd-arm-l, .draw-step3 .pd-arm-r { background: #ff5722; animation: waterPulse 1.5s ease-in-out infinite; }
   .draw-step4 .pd-head { background: #ff5722; animation: waterPulse 1.5s ease-in-out infinite; }
 
+  .prayer-row {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 6px;
+  }
+  .prayer-row.next { border-color: var(--primary); background: #e8f5f5; }
+  .prayer-row .pname { font-weight: 600; color: var(--primary); }
+  .prayer-row .ptime { font-weight: 700; font-size: 1.05rem; color: #222; }
+  .prayer-row .pbadge {
+    font-size: 0.72rem; background: var(--primary); color: white;
+    padding: 2px 8px; border-radius: 10px; margin-left: 6px;
+  }
+
   /* Печатење */
   @media print {
     .install-banner, .cycle-btn, .audio-btn, .copy-btn-action, .copy-btn, .mode-tabs { display: none !important; }
@@ -287,6 +303,7 @@
 <body>
 
 <h1>🕌 Водич за намаз</h1>
+<p class="subtitle" style="font-weight:600; color:var(--primary); margin-bottom:2px;">за Решат Маловски</p>
 <p class="subtitle">Автоматски • Рачен • Абдест • Сите дови</p>
 
 <div class="mode-tabs">
@@ -294,6 +311,7 @@
   <button class="mode-tab" id="tabManual" onclick="switchMode('manual')">Рачен</button>
   <button class="mode-tab" id="tabAbdest" onclick="switchMode('abdest')">Абдест</button>
   <button class="mode-tab" id="tabAllduas" onclick="switchMode('allduas')">📖 Сите дови</button>
+  <button class="mode-tab" id="tabAzan" onclick="switchMode('azan')">🔔 Езан</button>
 </div>
 
 <!-- ==================== АВТОМАТСКИ ВОДИЧ ==================== -->
@@ -387,7 +405,7 @@
     </div>
     <div class="abdest-step">
       <div class="abdest-num">2</div>
-      <div class="person-draw draw-step3"><div class="pd-head"></div><div class="pd-body"></div><div class="pd-arm-l"></div><div class="pd-arm-r"></div><div class="pd-leg-l"></div><div class="pd-leg-r"></div><div class="pd-hand-l"></div><div class="pd-hand-r"></div></div>
+      <div class="person-draw"><img src="./img/abdest-hands.jpg" alt="Миење на рацете" loading="lazy"></div>
       <div class="abdest-content">
         <div class="abdest-title">Миење на рацете до зглобовите</div>
         <div class="abdest-desc">Измиј ги двете раце до зглобовите <strong>три пати</strong>. Почни од <strong>десната</strong> рака. Кажи <strong>Бисмиллах</strong>.</div>
@@ -402,7 +420,7 @@
     </div>
     <div class="abdest-step">
       <div class="abdest-num">3</div>
-      <div class="person-draw draw-step4"><div class="pd-head"></div><div class="pd-body"></div><div class="pd-arm-l"></div><div class="pd-arm-r"></div><div class="pd-leg-l"></div><div class="pd-leg-r"></div></div>
+      <div class="person-draw"><img src="./img/abdest-mouth.jpg" alt="Плакнење на устата" loading="lazy"></div>
       <div class="abdest-content">
         <div class="abdest-title">Плакнење на устата (мадмада)</div>
         <div class="abdest-desc">Земи вода во устата со десна рака и исплакни ја <strong>три пати</strong>.</div>
@@ -417,7 +435,7 @@
     </div>
     <div class="abdest-step">
       <div class="abdest-num">4</div>
-      <div class="person-draw draw-step4"><div class="pd-head"></div><div class="pd-body"></div><div class="pd-arm-l"></div><div class="pd-arm-r"></div><div class="pd-leg-l"></div><div class="pd-leg-r"></div></div>
+      <div class="person-draw"><img src="./img/abdest-nose.jpg" alt="Вдишување вода во нос" loading="lazy"></div>
       <div class="abdest-content">
         <div class="abdest-title">Вдишување вода во нос (истиншак)</div>
         <div class="abdest-desc">Земи вода со десна рака, вдиши ја во носот и исфрли ја со лева рака. <strong>Три пати</strong>.</div>
@@ -432,27 +450,27 @@
     </div>
     <div class="abdest-step">
       <div class="abdest-num">5</div>
-      <div class="person-draw"><div class="pd-head"></div><div class="pd-body"></div><div class="pd-arm-l"></div><div class="pd-arm-r"></div><div class="pd-leg-l"></div><div class="pd-leg-r"></div></div>
+      <div class="person-draw"><img src="./img/abdest-face.jpg" alt="Миење на лицето" loading="lazy"></div>
       <div class="abdest-content"><div class="abdest-title">Миење на лицето</div><div class="abdest-desc">Измиј го целото лице (од челото до брадата и од уво до уво) <strong>три пати</strong>.</div></div>
     </div>
     <div class="abdest-step">
       <div class="abdest-num">6</div>
-      <div class="person-draw"><div class="pd-head"></div><div class="pd-body"></div><div class="pd-arm-l"></div><div class="pd-arm-r"></div><div class="pd-leg-l"></div><div class="pd-leg-r"></div></div>
+      <div class="person-draw"><img src="./img/abdest-arms.jpg" alt="Миење на рацете до лактите" loading="lazy"></div>
       <div class="abdest-content"><div class="abdest-title">Миење на рацете до лактите</div><div class="abdest-desc">Измиј ја <strong>десната</strong> рака до лактот три пати, потоа <strong>левата</strong> три пати.</div></div>
     </div>
     <div class="abdest-step">
       <div class="abdest-num">7</div>
-      <div class="person-draw"><div class="pd-head"></div><div class="pd-body"></div><div class="pd-arm-l"></div><div class="pd-arm-r"></div><div class="pd-leg-l"></div><div class="pd-leg-r"></div></div>
+      <div class="person-draw"><img src="./img/abdest-head.jpg" alt="Бришење на главата" loading="lazy"></div>
       <div class="abdest-content"><div class="abdest-title">Бришење на главата (месх)</div><div class="abdest-desc">Со влажни раце избриши ја главата <strong>еднаш</strong> од напред кон назад.</div></div>
     </div>
     <div class="abdest-step">
       <div class="abdest-num">8</div>
-      <div class="person-draw"><div class="pd-head"></div><div class="pd-body"></div><div class="pd-arm-l"></div><div class="pd-arm-r"></div><div class="pd-leg-l"></div><div class="pd-leg-r"></div></div>
+      <div class="person-draw"><img src="./img/abdest-ears.jpg" alt="Бришење на ушите" loading="lazy"></div>
       <div class="abdest-content"><div class="abdest-title">Бришење на ушите</div><div class="abdest-desc">Со показалецот избриши ги внатрешноста на ушите, со палецот надворешноста. <strong>Еднаш</strong>.</div></div>
     </div>
     <div class="abdest-step">
       <div class="abdest-num">9</div>
-      <div class="person-draw"><div class="pd-head"></div><div class="pd-body"></div><div class="pd-arm-l"></div><div class="pd-arm-r"></div><div class="pd-leg-l"></div><div class="pd-leg-r"></div></div>
+      <div class="person-draw"><img src="./img/abdest-feet.jpg" alt="Миење на нозете" loading="lazy"></div>
       <div class="abdest-content"><div class="abdest-title">Миење на нозете до глуждовите</div><div class="abdest-desc">Измиј ја <strong>десната</strong> нога до глуждот три пати, потоа <strong>левата</strong>. Особено меѓу прстите.</div></div>
     </div>
     <div class="abdest-step">
@@ -587,6 +605,39 @@
   <div class="note">Еднаш десно, еднаш лево.</div>
 </div>
 </div>
+</div>
+
+<!-- ==================== ЕЗАН / ВРЕМИЊА ЗА НАМАЗ ==================== -->
+<div id="azanMode" class="hidden">
+  <div class="card">
+    <h3 style="color:var(--primary); margin-bottom:6px;">🔔 Известувања за Езан</h3>
+    <p style="font-size:0.88rem; color:#555; margin-bottom:10px;">
+      Времињата се пресметани за Скопје и автоматски е додадено +5 минути за Дебар.
+      Апликацијата мора да биде отворена (или во позадина на телефонот) за да те извести точно на време —
+      веб-апликациите не можат да будат аларм кога се целосно затворени.
+    </p>
+
+    <div class="cycle-controls" style="margin-top:0;">
+      <label class="toggle-label" style="flex:1; min-width:100%; justify-content:space-between;">
+        <span>🔔 Известувања за Езан</span>
+        <input type="checkbox" id="azanEnabledCheck" onchange="onAzanToggle()">
+      </label>
+    </div>
+    <button class="cycle-btn" id="azanPermBtn" onclick="requestAzanPermission()" style="margin-top:8px;">🔓 Овозможи известувања во прелистувачот</button>
+    <p id="azanPermStatus" style="text-align:center; font-size:0.82rem; color:#777; margin-top:6px;"></p>
+
+    <div class="info-box" style="margin-top:12px;">
+      <strong>Дебар</strong> — <span id="azanDateLabel"></span><br>
+      Метод на пресметка: Diyanet (Турција/Балкан) • <span id="azanUpdatedLabel"></span>
+    </div>
+
+    <div id="azanTimesList" style="margin-top:8px;"></div>
+
+    <button class="cycle-btn" onclick="loadPrayerTimes(true)" style="margin-top:10px; background:var(--secondary);">🔄 Освежи времиња</button>
+    <p style="font-size:0.78rem; color:#888; margin-top:8px;">
+      Забелешка: времињата се пресметани по астрономска метода и можат да отстапуваат неколку минути од официјалниот календар на Исламската заедница. Ако забележиш разлика, кажи ми за да го прилагодам.
+    </p>
+  </div>
 </div>
 
 <!-- ==================== РЕЗУЛТАТ (за рачен) ==================== -->
@@ -863,14 +914,67 @@ let isSpeaking = false;
 function getPos(id) { return positions.find(p => p.id === id); }
 
 // ============================================================
-// SPEAK – ПОБАВНО И ПОЈАСНО (rate 0.55)
+// SPEAK – ПРВО АРАПСКИ ГЛАС (ако постои), ИНАЧЕ ТРАНСЛИТЕРАЦИЈА
 // ============================================================
-function speakText(text, callback) {
+let _voicesCache = null;
+function getVoicesAsync(callback) {
+  if (!window.speechSynthesis) { callback([]); return; }
+  if (_voicesCache && _voicesCache.length) { callback(_voicesCache); return; }
+  const existing = window.speechSynthesis.getVoices();
+  if (existing && existing.length) { _voicesCache = existing; callback(existing); return; }
+  let done = false;
+  const finish = () => {
+    if (done) return;
+    done = true;
+    _voicesCache = window.speechSynthesis.getVoices();
+    callback(_voicesCache);
+  };
+  window.speechSynthesis.onvoiceschanged = finish;
+  setTimeout(finish, 800);
+}
+
+function pickArabicVoice(voices) {
+  if (!voices || !voices.length) return null;
+  return voices.find(v => /^ar/i.test(v.lang)) || null;
+}
+
+function stripHtmlForSpeech(html) {
+  if (!html) return "";
+  return html.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+}
+
+// Говори арапски текст со арапски глас; ако не е достапен, чита ја транслитерацијата
+function speakDua(arabicText, translitText, callback) {
   if (!window.speechSynthesis) {
     if (callback) callback();
     return;
   }
   window.speechSynthesis.cancel();
+  const cleanArabic = stripHtmlForSpeech(arabicText);
+  getVoicesAsync((voices) => {
+    const arVoice = cleanArabic ? pickArabicVoice(voices) : null;
+    if (arVoice) {
+      const u = new SpeechSynthesisUtterance(cleanArabic);
+      u.voice = arVoice;
+      u.lang = arVoice.lang;
+      u.rate = 0.72;
+      u.pitch = 1.0;
+      u.volume = 1;
+      u.onend = function() { if (callback) callback(); };
+      u.onerror = function() { speakTranslitFallback(translitText, callback); };
+      window.speechSynthesis.speak(u);
+    } else {
+      speakTranslitFallback(translitText, callback);
+    }
+  });
+}
+
+// Резервен изговор - транслитерација со македонски глас
+function speakTranslitFallback(text, callback) {
+  if (!text || !window.speechSynthesis) {
+    if (callback) callback();
+    return;
+  }
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "mk-MK";
   u.rate = 0.55;
@@ -890,7 +994,7 @@ function speakText(text, callback) {
 }
 
 // ============================================================
-// makeBox – СО data-speak И КОПИРАЊЕ
+// makeBox – СО data-speak (транслитерација, резерва) И КОПИРАЊЕ
 // ============================================================
 function makeBox(ar, tr, mk, speak, note="", copyTextRaw="") {
   const safeSpeak = speak.replace(/'/g, "\\'").replace(/"/g, '&quot;');
@@ -909,7 +1013,7 @@ function makeBox(ar, tr, mk, speak, note="", copyTextRaw="") {
 // SWITCH MODE
 // ============================================================
 function switchMode(mode) {
-  ["auto","manual","abdest","allduas"].forEach(m => {
+  ["auto","manual","abdest","allduas","azan"].forEach(m => {
     const el = document.getElementById("tab" + m.charAt(0).toUpperCase() + m.slice(1));
     if (el) el.classList.toggle("active", m === mode);
     document.getElementById(m + "Mode").classList.toggle("hidden", m !== mode);
@@ -1010,7 +1114,7 @@ function runAutoStep() {
           }, 400);
           return;
         }
-        speakText(speakTexts[idx], function() {
+        speakDua(speakTexts[idx].ar, speakTexts[idx].tr, function() {
           idx++;
           setTimeout(speakNext, 400);
         });
@@ -1033,43 +1137,44 @@ function getSpeakTexts(posId, rakatNum, totalInPart) {
   const isFirst = rakatNum === 1;
   const isLast = rakatNum === totalInPart;
   const texts = [];
+  const push = (dua) => texts.push({ ar: dua.ar, tr: dua.speak });
 
   if (posId === "tekbir") {
-    texts.push(DUAS.tekbir.speak);
+    push(DUAS.tekbir);
   }
   else if (posId === "kiyam") {
     if (isFirst) {
-      texts.push(DUAS.subhanaka.speak);
-      texts.push(DUAS.auzu.speak);
+      push(DUAS.subhanaka);
+      push(DUAS.auzu);
     }
-    texts.push(DUAS.fatiha.speak);
+    push(DUAS.fatiha);
     if (rakatNum <= 2) {
-      texts.push(DUAS.sura.speak);
+      push(DUAS.sura);
     }
   }
   else if (posId === "ruku") {
-    for (let i = 0; i < 3; i++) texts.push(DUAS.ruku.speak);
+    for (let i = 0; i < 3; i++) push(DUAS.ruku);
   }
   else if (posId === "after_ruku") {
-    texts.push(DUAS.after_ruku_sami.speak);
-    texts.push(DUAS.after_ruku_rabbena.speak);
+    push(DUAS.after_ruku_sami);
+    push(DUAS.after_ruku_rabbena);
   }
   else if (posId === "sejda1" || posId === "sejda2") {
-    for (let i = 0; i < 3; i++) texts.push(DUAS.sujud.speak);
+    for (let i = 0; i < 3; i++) push(DUAS.sujud);
   }
   else if (posId === "between") {
-    texts.push(DUAS.between.speak);
+    push(DUAS.between);
   }
   else if (posId === "tashahhud") {
-    texts.push(DUAS.tashahhud.speak);
+    push(DUAS.tashahhud);
     if (isLast) {
-      texts.push(DUAS.salawat_salli.speak);
-      texts.push(DUAS.salawat_barik.speak);
-      texts.push(DUAS.rabbenatina.speak);
+      push(DUAS.salawat_salli);
+      push(DUAS.salawat_barik);
+      push(DUAS.rabbenatina);
     }
   }
   else if (posId === "salam") {
-    texts.push(DUAS.salam.speak);
+    push(DUAS.salam);
   }
   return texts;
 }
@@ -1323,33 +1428,307 @@ function renderManualDua(posId, rakatNum, totalInPart) {
 }
 
 // ============================================================
-// ПОСТАВУВАЊЕ НА СИТЕ AUDIO КОПЧИЊА (по вчитување)
+// AUDIO КОПЧИЊА – DELEGATION (работи и за динамички создадени копчиња
+// во Автоматски/Рачен таб, не само за статичните во Абдест/Сите дови)
 // ============================================================
-document.addEventListener('DOMContentLoaded', function() {
+if (!window.speechSynthesis) {
+  console.warn("⚠️ Овој прелистувач/средина не поддржува говор (speechSynthesis). Копчињата 🔊 нема да произведат звук.");
+}
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.audio-btn');
+  if (!btn) return;
   if (!window.speechSynthesis) {
-    console.warn("⚠️ Овој прелистувач/средина не поддржува говор (speechSynthesis). Копчињата 🔊 нема да произведат звук.");
+    showToast('⚠️ Говорот не е поддржан во овој прелистувач');
+    return;
   }
-  document.querySelectorAll('.audio-btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      const text = this.dataset.speak;
-      if (!text) {
-        console.warn("⚠️ Копчето нема data-speak атрибут:", this);
-        return;
-      }
-      if (!window.speechSynthesis) {
-        showToast('⚠️ Говорот не е поддржан во овој прелистувач');
-        return;
-      }
-      speakText(text, null);
-    });
-  });
+  const box = btn.closest('.dua-box');
+  const arabicEl = box ? box.querySelector('.arabic') : null;
+  const arabicText = arabicEl ? arabicEl.innerHTML : "";
+  const translitText = btn.dataset.speak || (box && box.querySelector('.translit') ? box.querySelector('.translit').innerText : "");
+  if (!arabicText && !translitText) {
+    console.warn("⚠️ Копчето нема текст за изговор:", btn);
+    return;
+  }
+  speakDua(arabicText, translitText, null);
 });
+
+// ============================================================
+// ЕЗАН – ПРЕСМЕТКА НА ВРЕМИЊА И ИЗВЕСТУВАЊА
+// ============================================================
+// Скопје координати; за Дебар додаваме +5 минути на секое време
+const SKOPJE_LAT = 41.9973;
+const SKOPJE_LON = 21.4280;
+const DEBAR_OFFSET_MIN = 5;
+const AZAN_CALC_METHOD = 13; // Diyanet (Турција) – најблиску до балканска пракса
+
+const PRAYER_DEFS = [
+  { key: "Fajr",    name: "Сабах" },
+  { key: "Dhuhr",   name: "Пладне" },
+  { key: "Asr",     name: "Икиндија" },
+  { key: "Maghrib", name: "Акшам" },
+  { key: "Isha",    name: "Јација" }
+];
+
+let azanSchedule = [];      // [{name, date: Date, key, notifiedKey}]
+let azanCheckInterval = null;
+let azanTimesCacheDate = null;
+
+function todayISODate() {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth()+1).padStart(2,'0');
+  const dd = String(d.getDate()).padStart(2,'0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+function todayDMY() {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth()+1).padStart(2,'0');
+  const dd = String(d.getDate()).padStart(2,'0');
+  return `${dd}-${mm}-${yyyy}`;
+}
+
+function addMinutesToHHMM(hhmm, minutesToAdd) {
+  const [h, m] = hhmm.split(':').map(n => parseInt(n, 10));
+  let total = h * 60 + m + minutesToAdd;
+  total = ((total % 1440) + 1440) % 1440;
+  const nh = Math.floor(total / 60);
+  const nm = total % 60;
+  return `${String(nh).padStart(2,'0')}:${String(nm).padStart(2,'0')}`;
+}
+
+function hhmmToDateToday(hhmm) {
+  const [h, m] = hhmm.split(':').map(n => parseInt(n, 10));
+  const d = new Date();
+  d.setHours(h, m, 0, 0);
+  return d;
+}
+
+async function loadPrayerTimes(forceRefresh) {
+  const cacheKey = 'azanTimes_' + todayISODate();
+  if (!forceRefresh) {
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        buildScheduleFromTimings(parsed.timings, parsed.fetchedAt);
+        return;
+      } catch(e) {}
+    }
+  }
+
+  document.getElementById("azanUpdatedLabel").textContent = "Се вчитува...";
+  try {
+    const url = `https://api.aladhan.com/v1/timings/${todayDMY()}?latitude=${SKOPJE_LAT}&longitude=${SKOPJE_LON}&method=${AZAN_CALC_METHOD}&timezonestring=Europe/Skopje`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const timings = data.data.timings;
+    const fetchedAt = new Date().toISOString();
+    localStorage.setItem(cacheKey, JSON.stringify({ timings, fetchedAt }));
+    buildScheduleFromTimings(timings, fetchedAt);
+  } catch (err) {
+    console.warn("⚠️ Не успеа преземање на времиња:", err);
+    document.getElementById("azanUpdatedLabel").textContent = "⚠️ Нема интернет – обиди се повторно подоцна";
+    // обиди се со вчерашен кеш ако постои некој постар запис
+    const anyCachedKey = Object.keys(localStorage).find(k => k.startsWith('azanTimes_'));
+    if (anyCachedKey) {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(anyCachedKey));
+        buildScheduleFromTimings(parsed.timings, parsed.fetchedAt, true);
+      } catch(e) {}
+    }
+  }
+}
+
+function buildScheduleFromTimings(timings, fetchedAt, isStale) {
+  const isFriday = new Date().getDay() === 5;
+  azanSchedule = PRAYER_DEFS.map(def => {
+    const rawTime = (timings[def.key] || "").split(' ')[0]; // отстрани временска зона ако постои
+    const debarTime = addMinutesToHHMM(rawTime, DEBAR_OFFSET_MIN);
+    let label = def.name;
+    if (def.key === "Dhuhr" && isFriday) label = "Џума (петок)";
+    return {
+      key: def.key,
+      name: label,
+      timeStr: debarTime,
+      date: hhmmToDateToday(debarTime)
+    };
+  });
+  azanTimesCacheDate = todayISODate();
+  const updated = new Date(fetchedAt);
+  document.getElementById("azanUpdatedLabel").textContent =
+    (isStale ? "⚠️ Стари (офлајн) времиња од " : "Ажурирано ") +
+    updated.toLocaleDateString('mk-MK') + " " + updated.toLocaleTimeString('mk-MK', {hour:'2-digit', minute:'2-digit'});
+  document.getElementById("azanDateLabel").textContent =
+    new Date().toLocaleDateString('mk-MK', { weekday:'long', day:'numeric', month:'long' });
+  renderAzanTimes();
+}
+
+function renderAzanTimes() {
+  const container = document.getElementById("azanTimesList");
+  if (!container) return;
+  if (!azanSchedule.length) {
+    container.innerHTML = `<p style="text-align:center; color:#888; font-size:0.88rem;">Нема достапни времиња.</p>`;
+    return;
+  }
+  const now = new Date();
+  const upcoming = azanSchedule.find(p => p.date > now);
+  container.innerHTML = azanSchedule.map(p => {
+    const isNext = upcoming && p.key === upcoming.key;
+    return `<div class="prayer-row ${isNext ? 'next' : ''}">
+      <span class="pname">${p.name}${isNext ? '<span class="pbadge">СЛЕДЕН</span>' : ''}</span>
+      <span class="ptime">${p.timeStr}</span>
+    </div>`;
+  }).join('');
+}
+
+function isAzanEnabled() {
+  return localStorage.getItem('azanEnabled') === 'true';
+}
+
+function onAzanToggle() {
+  const checked = document.getElementById("azanEnabledCheck").checked;
+  localStorage.setItem('azanEnabled', checked ? 'true' : 'false');
+  if (checked) {
+    if (!('Notification' in window)) {
+      showToast('⚠️ Овој прелистувач не поддржува известувања');
+    } else if (Notification.permission !== 'granted') {
+      showToast('Прво кликни на "Овозможи известувања"');
+    } else {
+      showToast('🔔 Известувањата за езан се вклучени');
+    }
+  } else {
+    showToast('🔕 Известувањата за езан се исклучени');
+  }
+  updatePermStatus();
+}
+
+async function requestAzanPermission() {
+  if (!('Notification' in window)) {
+    showToast('⚠️ Овој прелистувач не поддржува известувања');
+    return;
+  }
+  try {
+    const perm = await Notification.requestPermission();
+    updatePermStatus();
+    if (perm === 'granted') {
+      showToast('✅ Известувањата се овозможени');
+    } else {
+      showToast('⚠️ Известувањата се одбиени во прелистувачот');
+    }
+  } catch (e) {
+    console.warn(e);
+  }
+}
+
+function updatePermStatus() {
+  const statusEl = document.getElementById("azanPermStatus");
+  const btnEl = document.getElementById("azanPermBtn");
+  if (!('Notification' in window)) {
+    statusEl.textContent = "Прелистувачот не поддржува известувања.";
+    btnEl.classList.add('hidden');
+    return;
+  }
+  if (Notification.permission === 'granted') {
+    statusEl.textContent = "✅ Известувањата се дозволени во прелистувачот.";
+    btnEl.classList.add('hidden');
+  } else if (Notification.permission === 'denied') {
+    statusEl.textContent = "⚠️ Известувањата се блокирани. Дозволи ги во поставките на прелистувачот.";
+    btnEl.classList.add('hidden');
+  } else {
+    statusEl.textContent = "";
+    btnEl.classList.remove('hidden');
+  }
+}
+
+function sendAzanNotification(prayer) {
+  const title = `🕌 Време е за ${prayer.name}`;
+  const body = `Наближи времето за ${prayer.name} намаз во Дебар (${prayer.timeStr}).`;
+  const opts = { body, icon: './icon-192.svg', badge: './icon-192.svg', tag: 'azan-' + prayer.key, requireInteraction: false };
+
+  if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
+    navigator.serviceWorker.ready.then(reg => {
+      if (reg && reg.showNotification) {
+        reg.showNotification(title, opts);
+      } else if (Notification.permission === 'granted') {
+        new Notification(title, opts);
+      }
+    }).catch(() => {
+      if (Notification.permission === 'granted') new Notification(title, opts);
+    });
+  } else if (Notification.permission === 'granted') {
+    new Notification(title, opts);
+  }
+
+  // Обиди се да пуштиш звук на езан (доколку е додадена ./audio/azan.mp3), инаку тон + говор
+  playAzanSound(prayer.name);
+}
+
+function playAzanSound(prayerName) {
+  const audio = new Audio('./audio/azan.mp3');
+  audio.play().catch(() => {
+    // Резерва: краток тон + гласовна најава
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      [0, 0.35, 0.7].forEach((t, i) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.frequency.value = 660 - i*40;
+        o.connect(g); g.connect(ctx.destination);
+        g.gain.setValueAtTime(0.001, ctx.currentTime + t);
+        g.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + t + 0.05);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 0.3);
+        o.start(ctx.currentTime + t);
+        o.stop(ctx.currentTime + t + 0.32);
+      });
+    } catch(e) {}
+    if (window.speechSynthesis) {
+      speakTranslitFallback(`Дојде време за ${prayerName} намаз`, null);
+    }
+  });
+}
+
+function checkAzanSchedule() {
+  if (!isAzanEnabled()) return;
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  if (azanTimesCacheDate !== todayISODate()) {
+    // сменет ден – превчитај времиња
+    loadPrayerTimes(false);
+    return;
+  }
+  const now = new Date();
+  const firedKey = 'azanFired_' + todayISODate();
+  let fired = [];
+  try { fired = JSON.parse(localStorage.getItem(firedKey) || '[]'); } catch(e) {}
+
+  azanSchedule.forEach(p => {
+    const diffMs = now - p.date;
+    const alreadyFired = fired.includes(p.key);
+    if (!alreadyFired && diffMs >= 0 && diffMs < 60000) {
+      sendAzanNotification(p);
+      fired.push(p.key);
+      localStorage.setItem(firedKey, JSON.stringify(fired));
+    }
+  });
+  renderAzanTimes();
+}
+
+function initAzan() {
+  const enabled = isAzanEnabled();
+  document.getElementById("azanEnabledCheck").checked = enabled;
+  updatePermStatus();
+  loadPrayerTimes(false);
+  if (azanCheckInterval) clearInterval(azanCheckInterval);
+  azanCheckInterval = setInterval(checkAzanSchedule, 20000);
+}
 
 // ============================================================
 // ИНИЦИЈАЛИЗАЦИЈА
 // ============================================================
 document.getElementById("autoFigure").classList.add("pos-standing");
 document.getElementById("manualFigure").classList.add("pos-standing");
+initAzan();
 </script>
 </body>
 </html>
